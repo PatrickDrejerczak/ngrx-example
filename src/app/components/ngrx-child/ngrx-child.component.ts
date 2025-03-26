@@ -28,11 +28,7 @@ export class NgrxChildComponent {
     this.selectedUser = navigation?.extras?.state?.['selectedUser'];
   }
 
-  setUser(user: string) {
-    this.store.dispatch(new UserActions.SetUser(user));
-  }
-
-  setNormalUser(user: string) {
-    this.selectedUser = user;
+  clearUser() {
+    this.store.dispatch(new UserActions.ClearUser());
   }
 }
