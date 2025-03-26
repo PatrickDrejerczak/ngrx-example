@@ -13,4 +13,11 @@ export const routes: Routes = [
         (m) => m.NgrxUserComponent
       ),
   },
+  {
+    path: 'child',
+    loadComponent: () =>
+      import('./components/ngrx-child/ngrx-child.component').then(
+        (m) => m.NgrxChildComponent
+      ),
+  },
 ];

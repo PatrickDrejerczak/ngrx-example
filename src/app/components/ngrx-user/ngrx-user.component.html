@@ -1,1 +1,15 @@
-<p>ngrx-user works!</p>
+<p>State Example!</p>
+<p>
+  Selected user is <span class="ngrx-user">{{ user$ | async }}</span>
+</p>
+<button (click)="setUser('Alice')">Set User to Alice</button>
+<button (click)="setUser('Bob')">Set User to Bob</button>
+<hr class="hr" />
+<p>
+  Selected user normal state <span class="normal-user">{{ selectedUser }}</span>
+</p>
+<button (click)="setNormalUser('Alice')">Set User to Alice</button>
+<button (click)="setNormalUser('Bob')">Set User to Bob</button>
+<hr class="hr" />
+<button routerLink="/">Back to Home</button>
+<button (click)="navigateToDestinationWithState()">To Child</button>

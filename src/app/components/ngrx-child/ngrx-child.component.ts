@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserState } from '../../store/user.reducer';
 import * as UserActions from '../../store/user.actions';
 import { AsyncPipe } from '@angular/common';
 import { selectUser } from '../../reducers';
-import { NavigationExtras, Router, RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 // Define the type of your root state
 interface AppState {
@@ -13,17 +13,19 @@ interface AppState {
 }
 
 @Component({
-  selector: 'app-ngrx-user',
+  selector: 'app-ngrx-child',
   imports: [AsyncPipe, RouterLink],
-  templateUrl: './ngrx-user.component.html',
-  styleUrl: './ngrx-user.component.css',
+  templateUrl: './ngrx-child.component.html',
+  styleUrl: './ngrx-child.component.css',
 })
-export class NgrxUserComponent {
+export class NgrxChildComponent {
   user$: Observable<string>;
-  selectedUser: string = '';
+  @Input() selectedUser: any;
 
   constructor(private store: Store<AppState>, private router: Router) {
     this.user$ = this.store.select(selectUser);
+    const navigation = this.router.getCurrentNavigation();
+    this.selectedUser = navigation?.extras?.state?.['selectedUser'];
   }
 
   setUser(user: string) {
@@ -32,12 +34,5 @@ export class NgrxUserComponent {
 
   setNormalUser(user: string) {
     this.selectedUser = user;
-  }
-
-  navigateToDestinationWithState() {
-    const navigationExtras: NavigationExtras = {
-      state: { selectedUser: this.selectedUser },
-    };
-    this.router.navigate(['/child'], navigationExtras);
   }
 }
